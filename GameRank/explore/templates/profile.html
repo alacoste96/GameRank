@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Mi perfil{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Perfil de {{ user.username }}</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <p><strong>Número de votaciones:</strong> {{ num_ratings }}</p>
+                    <p><strong>Puntuación media:</strong> {{ avg_rating }}</p>
+
+                    <hr>
+                    <a href="{% url 'user_games' 'voted' %}" class="btn btn-primary w-100 mb-2">Ver juegos votados</a>
+                    <a href="{% url 'user_games' 'followed' %}" class="btn btn-secondary w-100">Ver juegos seguidos</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

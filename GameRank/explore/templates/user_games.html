@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1 class="text-center mb-4">{{ title }}</h1>
+
+  {% if games %}
+  <div class="row">
+    {% for game in games %}
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
+      <div class="card h-100">
+        <img src="{{ game.thumbnail }}" class="card-img-top" alt="{{ game.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ game.title }}</h5>
+          <p class="card-text">{{ game.genre }} | {{ game.platform }}</p>
+          <p class="text-muted">
+          <strong>Puntuación media:</strong> {{ game.avg_rating|floatformat:1 }}  ⭐ ({{ game.num_votes }} votos)
+          </p>
+          <div class="d-flex justify-content-between">
+            {% if game.id in followed %}
+              <a href="{% url 'follow_tool' game.source_id 'false'%}" class="btn btn-danger">Dejar de seguir</a> 
+            {% else %}
+              <a href="{% url 'follow_tool' game.source_id 'true' %}" class="btn btn-success">Seguir</a> 
+            {% endif %}
+            <a href="{% url 'details' game.source_id %}" class="btn btn-sm btn-primary">Ver más</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+    <p class="text-center">No has votado ningún juego todavía.</p>
+  {% endif %}
+</div>
+{% endblock %}
+

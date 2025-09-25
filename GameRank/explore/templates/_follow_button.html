@@ -1,0 +1,18 @@
+{% if followed %}
+    <div
+        hx-get="{% url 'follow_tool' game.source_id 'false' %}"
+        hx-target="this"
+        hx-swap="outerHTML"
+    >
+        <button type="button" class="btn btn-danger btn-sm">Dejar de seguir</button>
+    </div>
+{% else %}
+    <div
+        hx-get="{% url 'follow_tool' game.source_id 'true' %}"
+        hx-target="this"
+        hx-swap="outerHTML"
+    >
+        <button type="button" class="btn btn-success btn-sm">Seguir</button>
+    </div>
+{% endif %}
+

@@ -1,0 +1,19 @@
+stages:
+  - test
+
+test-django:
+  image: python:3.11
+  stage: test
+  variables:
+    DJANGO_SETTINGS_MODULE: GameRank.settings
+  before_script:
+    - python3 -m venv venv
+    - . venv/bin/activate
+    - pip install --upgrade pip
+    - pip install django
+    - python3 GameRank/manage.py migrate
+  script:
+    - . venv/bin/activate
+    - python3 GameRank/manage.py test accounts
+    - python3 GameRank/manage.py test explore
+

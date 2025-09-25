@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Error 404 - GameRank</title>
+    <link href="{% static 'sb-admin/dist/css/styles.css' %}" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <style>
+      .img-error {
+        max-width: 300px;
+        height: auto;
+      }
+      .error-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div class="error-container">
+
+      <img src="{% static 'images/error_404.jpg' %}" alt="Error 404" />
+      <h1 class="display-5 fw-bold text-dark">Página no encontrada</h1>
+      <p class="lead mb-4">La URL solicitada no existe o fue eliminada.</p>
+      <a class="btn btn-primary" href="{% url 'explore' %}">
+        <i class="fas fa-arrow-left me-1"></i> Volver al inicio
+      </a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="{% static 'sb-admin/dist/js/scripts.js' %}"></script>
+  </body>
+</html>
+
+

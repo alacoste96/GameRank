@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}{{ game.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    {% if messages %}
+    <div class="container mt-3">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <h1 class="text-center mb-4">{{ game.title }}</h1>
+
+    <div class="row">
+        <!-- Imagen del juego -->
+        <div class="col-md-5">
+            <img src="{{ game.thumbnail }}" class="img-fluid rounded mb-3 w-100" alt="{{ game.title }}">
+        </div>
+
+        <!-- Detalles del juego -->
+        <div class="col-md-7">
+            <p><strong>Género:</strong> {{ game.genre }}</p>
+            <p><strong>Plataforma:</strong> {{ game.platform }}</p>
+            <p><strong>Desarrollador:</strong> {{ game.developer }}</p>
+            <p><strong>Publicador:</strong> {{ game.publisher }}</p>
+            <p><strong>Fecha de lanzamiento:</strong> {{ game.release_date }}</p>
+            <p><strong>Descripción:</strong> {{ game.description }}</p>
+            <p><strong>Puntuación media:</strong> {{ game.averageRating|floatformat:1 }} / 5 ⭐({{ game.ratingCount }} votos)</p>
+            
+            <div class="d-flex gap-2 flex-wrap mb-3">
+                <a href="{% url 'game_json' game.source_id %}" class="btn btn-outline-info" target="_blank">Ver detalles en JSON</a>
+                {% if is_following %}
+                  <a href="{% url 'follow_tool' game.source_id 'false' %}" class="btn btn-danger">Dejar de seguir</a>
+                {% else %}
+                  <a href="{% url 'follow_tool' game.source_id 'true' %}" class="btn btn-success">Seguir</a>
+                {% endif %}
+             </div>
+        </div>
+    </div>
+
+    <hr class="mt-5">
+    
+    <form method="post" action="{% url 'rate' game.source_id %}" class="mb-4">
+      {% csrf_token %}
+      <div class="mb-2 fw-bold">Tu valoración actual:</div>
+      <div class="star-rating d-flex justify-content-end"> 
+        {% for i in "054321" %}
+              <div class="form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       name="score"
+                       id="star{{ i }}"
+                       value="{{ i }}"
+                       {% if user_rating and user_rating.score == i|add:'0' %}checked{% endif %}>
+                <label class="form-check-label" for="star{{ i }}">
+                    {% if i == "0" %}
+                        0 ★
+                    {% else %}
+                       {{ i }} ★
+                    {% endif %}
+                </label>
+            </div>
+          {% endfor %}
+      </div>
+      <button type="submit" class="btn btn-sm btn-primary mt-2">Enviar valoración</button>
+    </form>
+
+    <div class="text-center mb-4">
+        <h5>Escribe un comentario:</h5>
+        <form method="post">
+            {% csrf_token %}
+            <textarea name="content" class="form-control mb-2" rows="3" placeholder="Tu comentario..."></textarea>
+            <button type="submit" class="btn btn-primary">Comentar</button>
+        </form>
+    </div> 
+    <hr>
+    {% include '_comments.html' %}
+</div>
+{% endblock %}
+

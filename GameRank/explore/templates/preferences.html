@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}Configuración{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Configuración de Usuario</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {% if messages %}
+                          {% for message in messages %}
+                            <div class="alert alert-success">{{ message }}</div>
+                          {% endfor %}
+                        {% endif %}
+                        <!-- Alias -->
+                        <div class="mb-3">
+                            <label for="alias" class="form-label">Alias</label>
+                            <input type="text" class="form-control" id="alias" name="alias" value="{{ request.user.first_name }}" placeholder="Tu nombre visible">
+                        </div>
+
+                        <!-- Tipo de letra -->
+                        <div class="mb-3">
+                            <label for="font" class="form-label">Tipo de letra</label>
+                            <select class="form-select" id="font" name="font">
+                                <option value="sans" {% if request.session.font == 'sans' %}selected{% endif %}>Sans Serif</option>
+                                <option value="serif" {% if request.session.font == 'serif' %}selected{% endif %}>Serif</option>
+                                <option value="mono" {% if request.session.font == 'mono' %}selected{% endif %}>Monoespaciada</option>
+                                <option value="comic" {% if request.session.font == 'comic' %}selected{% endif %}>Comic Sans MS</option>
+                                <option value="system" {% if request.session.font == 'system' %}selected{% endif %}>System UI</option>
+                                <option value="cursive" {% if request.session.font == 'cursive' %}selected{% endif %}>Cursiva (Cursive)</option>
+                                <option value="">Por defecto</option>
+                            </select>
+                        </div>
+
+                        <!-- Tamaño de texto -->
+                        <div class="mb-3">
+                            <label for="size" class="form-label">Tamaño del texto</label>
+                            <select class="form-select" id="size" name="size">
+                                <option value="tiny" {% if request.session.size == 'tiny' %}selected{% endif %}>Muy pequeño</option>
+                                <option value="sm" {% if request.session.size == 'sm' %}selected{% endif %}>Pequeño</option>
+                                <option value="md" {% if request.session.size == 'md' %}selected{% endif %}>Medio</option>
+                                <option value="lg" {% if request.session.size == 'lg' %}selected{% endif %}>Grande</option>
+                                <option value="xl" {% if request.session.size == 'xl' %}selected{% endif %}>Extra Grande</option>
+                                <option value="xxl" {% if request.session.size == 'xxl' %}selected{% endif %}>XXL</option>
+                                <option value="">Por defecto</option>
+                            </select>
+                        </div>
+
+                        <!-- Botón guardar -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+

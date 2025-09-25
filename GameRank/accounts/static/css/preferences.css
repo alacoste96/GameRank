@@ -1,0 +1,51 @@
+/* Tipos de letra */
+body.font-sans {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body.font-serif {
+    font-family: "Georgia", "Times New Roman", serif;
+}
+
+body.font-mono {
+    font-family: "Courier New", Courier, monospace;
+}
+
+body.font-comic {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+body.font-system {
+    font-family: system-ui, sans-serif;
+}
+
+body.font-cursive {
+    font-family: cursive;
+}
+
+/* Tamaños de texto */
+html[data-font-size="tiny"] {
+    font-size: 10px;
+}
+
+html[data-font-size="sm"] {
+    font-size: 14px;
+}
+
+html[data-font-size="md"] {
+    font-size: 18px;
+}
+
+html[data-font-size="lg"] {
+    font-size: 22px;
+}
+
+html[data-font-size="xl"] {
+    font-size: 26px;
+}
+
+html[data-font-size="xxl"] {
+    font-size: 30px;
+}
+
+

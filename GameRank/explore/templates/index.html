@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Explorar Juegos{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="text-center mb-4">
+        <img src="{% static 'images/GameRank-logo.png' %}" alt="GameRank Logo" class="img-fluid" style="max-height: 450px;">
+    </div>
+    <div class="row" id="game-list">
+        {% include "_game_list.html" with page_obj=page_obj %}
+    </div>
+</div>
+{% endblock %}
+

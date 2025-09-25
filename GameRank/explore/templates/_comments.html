@@ -1,0 +1,35 @@
+<div
+  id="comments-box"
+  hx-get="{% url 'comments_partial' game.source_id %}"
+  hx-trigger="every 30s"
+  hx-swap="outerHTML">
+
+  {% for comment in comments %}
+  <div class="border rounded p-2 mb-2">
+      <strong>{{ comment.user }}</strong> ({{ comment.created_at|date:"d M Y H:i" }}):<br>
+      {{ comment.text }}
+      <div class="mt-2 d-flex justify-content-start gap-3">
+        <form method="post" action="{% url 'react_comment' comment.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="reaction" value="like">
+            <button type="submit" class="btn btn-outline-success btn-sm">
+                👍 {{ comment.likesCount }}
+            </button>
+        </form>
+
+        <form method="post" action="{% url 'react_comment' comment.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="reaction" value="dislike">
+            <button type="submit" class="btn btn-outline-danger btn-sm">
+                👎 {{ comment.dislikesCount }}
+            </button>
+        </form>
+      </div>
+  </div>
+  {% empty %}
+  <p>No hay comentarios todavía.</p>
+  {% endfor %}
+
+</div>
+
+

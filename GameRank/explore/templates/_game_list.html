@@ -1,0 +1,52 @@
+{% for game in page_obj %}
+  <div class="col-md-4 mb-4">
+      <div class="card h-100">
+          <img src="{{ game.thumbnail }}" class="card-img-top" alt="{{ game.title }}">
+          <div class="card-body">
+              <h5 class="card-title">{{ game.title }}</h5>
+              <p class="card-text">{{ game.description|truncatewords:25 }}</p>
+              <p class="text-muted">{{ game.platform }} | {{ game.genre }}</p>
+              <p>
+                ⭐ {{ game.avg_rating|default:"0"|floatformat:1 }}/5  
+                ({{ game.num_votes }} voto{{ game.num_votes|pluralize }})
+            </p>
+            <div class="d-flex justify-content-between">
+
+                <a href="{% url 'details' game.source_id %}" class="btn btn-sm btn-outline-primary">Ver detalles</a>
+
+                {% if user.is_authenticated %} 
+                    {% if game.id in followed %}
+                        <div
+                            hx-get="{% url 'follow_tool' game.source_id 'false' %}"
+                            hx-target="this"
+                            hx-swap="outerHTML"
+                        >
+                            <button type="button" class="btn btn-danger btn-sm">Dejar de seguir</button>
+                        <!-- <a href="#" class="btn btn-danger btn-sm">Dejar de seguir</a> -->
+                        </div>
+                    {% else %}
+                        <div
+                            hx-get="{% url 'follow_tool' game.source_id 'true' %}"
+                            hx-target="this"
+                            hx-swap="outerHTML"
+                        >
+                            <button type="button" class="btn btn-success btn-sm">Seguir</button>
+                        <!-- <a href="#" class="btn btn-success btn-sm">Seguir</a>-->
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+          </div>
+      </div>
+  </div>
+{% endfor %}
+
+{% if page_obj.has_next %}
+  <div
+      hx-get="{% url 'explore' %}?page={{ page_obj.next_page_number }}"
+      hx-trigger="revealed"
+      hx-swap="afterend"
+      class="scroll-sentinel">
+  </div>
+{% endif %}
+

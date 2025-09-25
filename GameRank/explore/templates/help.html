@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Ayuda{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Ayuda y Documentación</h1>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4>¿Qué es GameRank?</h4>
+            <p>
+                GameRank es una plataforma web para explorar, puntuar y seguir videojuegos free-to-play. 
+                La aplicación recoge datos de múltiples fuentes (XML y APIs JSON), los integra y permite a los usuarios <strong>autenticados</strong> interactuar con ellos.
+            </p>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4>¿Qué puedo hacer en GameRank?</h4>
+            <ul>
+                <li>Explorar una base de datos unificada de videojuegos.</li>
+                <li>Ver información detallada de cada juego.</li>
+                <li>Valorar cada juego con una puntuación del 0 al 5.</li>
+                <li>Escribir y leer comentarios sobre los juegos.</li>
+                <li>Seguir juegos que te interesen para acceder rápidamente a ellos.</li>
+                <li>Personalizar la interfaz: alias, tipo y tamaño de fuente.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4>Estructura de la aplicación</h4>
+            <p>
+                GameRank se basa en una arquitectura Django. Los juegos se almacenan en una base de datos local a partir de fuentes externas. 
+                Las vistas principales incluyen:
+            </p>
+            <ul>
+                <li><strong>Página principal:</strong> Juegos ordenados por puntuación media.</li>
+                <li><strong>Detalles del juego:</strong> Comentarios, puntuaciones, botón para seguir y valoración.</li>
+                <li><strong>Votados:</strong> Juegos que has valorado.</li>
+                <li><strong>Seguidos:</strong> Juegos que has seguido.</li>
+                <li><strong>Configuración:</strong> Personaliza tu perfil y preferencias visuales.</li>
+                <li><strong>Ayuda:</strong> Esta página informativa.</li>
+            </ul>
+        </div>
+    </div>
+<div class="card mb-4">
+    <div class="card-body">
+        <h4>Créditos del equipo de desarrollo</h4>
+        <ul>
+            <li><strong>Desarrollador:</strong> Alexandre Lacoste Rodríguez</li>
+            <li><strong>Profesores:</strong></li>
+            <ul>
+                <li>
+                    <a href="https://servicios.urjc.es/pdi/ver/david.morenolu" target="_blank" rel="noopener noreferrer">
+                        David Moreno Lumbreras
+                    </a>
+                </li>
+                <li>
+                    <a href="https://servicios.urjc.es/pdi/ver/jesus.gonzalez.barahona" target="_blank" rel="noopener noreferrer">
+                        Jesús M. González Barahona
+                    </a>
+                </li>
+                <li>
+                    <a href="https://servicios.urjc.es/pdi/ver/alberto.rodriguezi" target="_blank" rel="noopener noreferrer">
+                        Alberto Rodríguez Iglesias
+                    </a>
+                </li>
+            </ul>
+        </ul>
+        <p class="mt-2 text-muted">
+            Proyecto realizado en el marco del curso de Servicios Telemáticos de 3º año de Ingeniería Telemática, Universidad Rey Juan Carlos.
+        </p>
+    </div>
+</div>
+{% endblock %}
+
